@@ -1,6 +1,6 @@
 # Plain Toggles Suite Plugin for Kirby CMS
 
-<img src="./.github/screenshot.png" alt="Kirby Suite" width="450" height="auto">
+<img src="./.github/screenshot.png" alt="Kirby Toggles Suite">
 
 
 Extends the [Kirby Toggles Field](https://getkirby.com/docs/reference/panel/fields/toggles) with colors, images and many more.
@@ -14,7 +14,7 @@ Extends the [Kirby Toggles Field](https://getkirby.com/docs/reference/panel/fiel
 **With Composer**
 
 ```bash
-composer require getplain/kirby-toggles-suite
+composer require plain/kirby-toggles-suite
 ```
 
 # Examples
