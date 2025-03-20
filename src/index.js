@@ -1,6 +1,6 @@
 import TogglesInput from "@/components/TogglesInput.vue";
 import TogglesField from "@/components/TogglesField.vue";
-import PlainLicense from "@/components/PlainLicense.vue";
+import PlainLicense from "../utils/PlainLicense.vue";
 
 window.panel.plugin("plain/toggles-suite", {
   components: {
