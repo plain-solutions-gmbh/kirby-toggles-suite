@@ -5,9 +5,6 @@
 use Plain\Helpers\Plugin;
 
 Plugin::load(
-    "plain/toggles-suite",
-    autoloader: [
-        "classes" => ["namespace" => "Plain\\Toggles"],
-        "config" => true,
-    ]
+    "plain/toggles",
+    autoloader: true
 );

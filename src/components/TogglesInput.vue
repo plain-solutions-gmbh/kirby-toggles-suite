@@ -74,7 +74,7 @@
         </ul>
       </k-input-validator>
     </fieldset>
-    <k-plain-license prefix="toggles-suite" />
+    <k-plain-license prefix="toggles" />
   </div>
 </template>
 

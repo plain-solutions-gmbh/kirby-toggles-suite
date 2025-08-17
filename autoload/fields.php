@@ -14,7 +14,7 @@ $type = F::load(
 	allowOutput: false
 );
 
-return A::merge($type, [
+return ['toggles' => A::merge($type, [
 	'props'	=> [
 		'grow' => function (bool $grow = true) {
 			if ($this->hasImages()) {
@@ -56,4 +56,4 @@ return A::merge($type, [
 			return $options->render($this->model());
 		}
 	]
-]);
+])];

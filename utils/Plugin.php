@@ -31,12 +31,13 @@ class Plugin
         //Needs to be loadet before autoload!
         $license_obj = ($info['license'] === 'MIT') ? null : new License($name, $info);
 
-        $extends = Autoloader::load(
-            name:   $name,
-            root:   $root,
-            data:   $extends ?? [],
-            tasks:  $autoloader
-        );
+        if ($autoloader) {
+            $extends = Autoloader::load(
+                name:   $name,
+                root:   $root,
+                data:   $extends ?? [],
+            );
+        }
 
         $params = [
             'name'      => $name,
