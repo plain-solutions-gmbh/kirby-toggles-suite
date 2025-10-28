@@ -21,7 +21,7 @@ class Plugin
         ?array $extends = null,
         ?array $info = null,
         string|null $root = null,
-        Autoloader|array|bool $autoloader = false
+        string|bool $autoloader = false
     ): void {
 
 
@@ -31,13 +31,17 @@ class Plugin
         //Needs to be loadet before autoload!
         $license_obj = ($info['license'] === 'MIT') ? null : new License($name, $info);
 
-        if ($autoloader) {
-            $extends = Autoloader::load(
-                name:   $name,
-                root:   $root,
-                data:   $extends ?? [],
-            );
-        }
+		if ($autoloader) {
+
+			//Allow to apply custom Autoloader
+			$autolader_class = is_bool($autoloader) ? Autoloader::class : $autoloader;
+
+			$extends = $autolader_class::load(
+				name: $name,
+				root: $root,
+				data: $extends ?? []
+			);
+		}
 
         $params = [
             'name'      => $name,
