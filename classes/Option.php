@@ -18,54 +18,38 @@ use Kirby\Blueprint\Factory;
 use Kirby\Blueprint\NodeIcon;
 use Kirby\Blueprint\NodeText;
 use Kirby\Cms\ModelWithContent;
+use Kirby\Toolkit\A;
 
 class Option extends KirbyOption
 {
     public function __construct(
         public string|int|float|null $value,
         public bool $disabled = false,
-        public NodeIcon|null $icon = null,
-        public NodeText|null $info = null,
-        public NodeText|null $text = null,
-        public NodeText|null $color = null,
-        public NodeText|null $background = null,
-        public NodeText|null $image = null
+        public string|null $icon = null,
+        public string|array|null $info = null,
+        string|array|null $text = null,
+        public string|array|null $color = null,
+        public string|array|null $background = null,
+        public string|array|null $image = null
     ) {
-        $this->text ??= new NodeText(["en" => $this->value]);
+        $this->text = $text ?? ['en' => $this->value];
     }
 
-    public static function factory(string|int|float|null|array $props): static
-    {
-        if (is_array($props) === false) {
-            $props = ["value" => $props];
-        }
-
-        $props = Factory::apply($props, [
-            "icon"          => NodeIcon::class,
-            "info"          => NodeText::class,
-            "text"          => NodeText::class,
-            "color"         => NodeText::class,
-            "background"    => NodeText::class,
-            "image"         => NodeText::class
-        ]);
-
-        return new static(...$props);
-    }
 
     /**
      * Renders all data for the option
      */
     public function render(ModelWithContent $model): array
     {
-        return [
-            "disabled" => $this->disabled,
-            "value" => $this->value ?? "",
-            "icon" => $this->icon?->render($model),
-            "info" => $this->info?->render($model),
-            "text" => $this->text?->render($model),
-            "color" => $this->color?->render($model),
-            "background" => $this->background?->render($model),
-            "image" => $this->image?->render($model),
-        ];
+
+        return A::merge(
+            Parent::render($model),
+            [
+                "color" => $this->color,
+                "background" => $this->background,
+                "image" => $this->image,
+            ]
+        );
+       
     }
 }
