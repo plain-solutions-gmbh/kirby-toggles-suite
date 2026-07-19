@@ -30,20 +30,21 @@ class Option extends KirbyOption
         string|array|null $text = null,
         public string|array|null $color = null,
         public string|array|null $background = null,
-        public string|array|null $image = null
+        public string|array|null $image = null,
+        public bool $resolve = true
     ) {
         $this->text = $text ?? ['en' => $this->value];
     }
 
 
-    /**
+     /**
      * Renders all data for the option
      */
-    public function render(ModelWithContent $model): array
+    public function render(ModelWithContent $model, bool $safeMode = true): array
     {
 
         return A::merge(
-            Parent::render($model),
+            Parent::render($model, $safeMode),
             [
                 "color" => $this->color,
                 "background" => $this->background,

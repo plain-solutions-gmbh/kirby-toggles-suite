@@ -63,6 +63,6 @@ options:
 
 # License
 
-By using this project, you agree to the terms and conditions outlined in our [Terms of Service](https://plain-solutions.net/terms). 
+Starting with version 1.1.0, this plugin is available under the MIT license.
 
-To acquire a license for this project, please visit our [Licensing Page](https://plain-solutions.net/906069).
+All customers who purchased this plugin receive support for one year from the date of purchase.

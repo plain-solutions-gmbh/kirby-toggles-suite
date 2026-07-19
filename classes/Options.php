@@ -16,7 +16,7 @@ use Kirby\Option\Options as KirbyOptions;
 
 class Options extends KirbyOptions
 {
-    public static function factory(array $items = []): static
+    public static function factory(array $items = [], bool $resolve = true): static
     {
         $collection = new static();
 
