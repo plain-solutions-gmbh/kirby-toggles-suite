@@ -1,25 +1,31 @@
 {
-    "name": "plain/kirby-toggles-suite",
-    "description": "Colorize your Kirby toggler field",
-    "license": "MIT",
-	"homepage": "https://plain-solutions.net/906069",
-    "type": "kirby-plugin",
-    "version": "1.1.0",
-	"authors": [
-		{
-			"name": "Roman Gsponer",
-			"email": "kirby@plain-solutions.net"
-		}
-	],
-	"require": {
-		"getkirby/composer-installer": "^1.1"
-	},
-	"autoload": {
-		"psr-4": {
-			"Plain\\Toggles\\": "classes/",
-		}
-	},
-	"config": {
-		"optimize-autoloader": true
-	}
+  "name": "plain/kirby-toggles-suite",
+  "description": "Colorize your Kirby toggler field",
+  "license": "MIT",
+  "homepage": "https://plain-solutions.net/906069",
+  "type": "kirby-plugin",
+  "version": "1.1.0",
+  "authors": [
+    {
+      "name": "Roman Gsponer",
+      "email": "kirby@plain-solutions.net"
+    }
+  ],
+  "require": {
+    "getkirby/composer-installer": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Plain\\Toggles\\": "classes/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "funding": [
+    {
+      "type": "PayPal",
+      "url": "https://www.paypal.com/donate/?hosted_button_id=B589E6B4GA8BY"
+    }
+  ]
 }
