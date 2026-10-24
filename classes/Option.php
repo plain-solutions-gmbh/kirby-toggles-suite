@@ -7,9 +7,9 @@ namespace Plain\Toggles;
  * 
  * @package   Plain Toggles Suite
  * @author    Roman Gsponer <kirby@plain-solutions.net>
- * @link      https://plain-solutions.net/
+ * @link      https://github.com/plain-solutions-gmbh/
  * @copyright Roman Gsponer
- * @license   https://plain-solutions.net/terms
+ * @license   MIT
  */
 
 use Kirby\Option\Option as KirbyOption;
