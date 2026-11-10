@@ -4,7 +4,7 @@ namespace Plain\Toggles;
 
 /**
  * 
- * Extend from src/Field/FieldOptions.php
+ * Extend from src/Form/FieldOptions.php
  * 
  * @package   Plain Toggles Suite
  * @author    Roman Gsponer <kirby@plain-solutions.net>
@@ -13,7 +13,7 @@ namespace Plain\Toggles;
  * @license   MIT
  */
 
-use Kirby\Field\FieldOptions as KirbyFieldOptions;
+use Kirby\Form\FieldOptions as KirbyFieldOptions;
 
 class FieldOptions extends KirbyFieldOptions
 {

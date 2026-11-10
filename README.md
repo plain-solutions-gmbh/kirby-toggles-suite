@@ -5,6 +5,15 @@
 
 Extends the [Kirby Toggles Field](https://getkirby.com/docs/reference/panel/fields/toggles) with colors, images and many more.
 
+## Compatibility
+
+| Kirby | Plugin version | Branch |
+|-------|----------------|--------|
+| 6     | 2.x | [`kirby-6`](https://github.com/plain-solutions-gmbh/kirby-toggles-suite/tree/kirby-6) |
+| 4 / 5 | 1.x | [`main`](https://github.com/plain-solutions-gmbh/kirby-toggles-suite/tree/main) |
+
+Composer installs the matching version automatically. For a manual installation, download the branch that fits your Kirby version.
+
 ## Installation
 
 **Manually**

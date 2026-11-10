@@ -7,33 +7,27 @@ namespace Composer\Autoload;
 class ComposerStaticInitcdf2c876f02b138349b845a8b588ad5e
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'P' =>
         array (
             'Plain\\Toggles\\' => 14,
-            'Plain\\Helpers\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Plain\\Toggles\\' => 
+        'Plain\\Toggles\\' =>
         array (
             0 => __DIR__ . '/../..' . '/classes',
-        ),
-        'Plain\\Helpers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/utils',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Plain\\Helpers\\License' => __DIR__ . '/../..' . '/utils/License.php',
-        'Plain\\Helpers\\Plugin' => __DIR__ . '/../..' . '/utils/Plugin.php',
         'Plain\\Toggles\\FieldOptions' => __DIR__ . '/../..' . '/classes/FieldOptions.php',
         'Plain\\Toggles\\Option' => __DIR__ . '/../..' . '/classes/Option.php',
         'Plain\\Toggles\\Options' => __DIR__ . '/../..' . '/classes/Options.php',
         'Plain\\Toggles\\OptionsApi' => __DIR__ . '/../..' . '/classes/OptionsApi.php',
         'Plain\\Toggles\\OptionsQuery' => __DIR__ . '/../..' . '/classes/OptionsQuery.php',
+        'Plain\\Toggles\\TogglesField' => __DIR__ . '/../..' . '/classes/TogglesField.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -28,6 +28,7 @@ class OptionsApi extends KirbyOptionsApi
         public string|null $text = null,
         public string|null $value = null,
         public string|null $icon = null,
+        public string|null $info = null,
         public string|null $color = null,
         public string|null $background = null,
         public string|null $image = null
@@ -43,6 +44,7 @@ class OptionsApi extends KirbyOptionsApi
             text: $props["text"] ?? null,
             value: $props["value"] ?? null,
             icon: $props["icon"] ?? null,
+            info: $props["info"] ?? null,
             color: $props["color"] ?? null,
             background: $props["background"] ?? null,
             image: $props["image"] ?? null
@@ -69,7 +71,7 @@ class OptionsApi extends KirbyOptionsApi
         // @codeCoverageIgnoreStart
         if ($data === null) {
             throw new NotFoundException(
-                "Options could not be loaded from API: " .
+                message: "Options could not be loaded from API: " .
                     $model->toSafeString($this->url)
             );
         }
@@ -83,6 +85,10 @@ class OptionsApi extends KirbyOptionsApi
         $data = Query::factory($this->query)->resolve($data);
         $options = [];
 
+        // text is only a raw string when using {< >}
+        // or when the safe mode is explicitly disabled (select field)
+        $safeMethod = $safeMode === true ? "toSafeHtmlString" : "toString";
+
         // create options by resolving text and value query strings
         // for each item from the data
         foreach ($data as $key => $item) {
@@ -91,12 +97,11 @@ class OptionsApi extends KirbyOptionsApi
                 $item = new Field(null, $key, $item);
             }
 
-            $safeMethod = $safeMode === true ? "toSafeString" : "toString";
-
             $options[] = [
                 // value is always a raw string
                 "value" => $model->toString($this->value, ["item" => $item]),
-                "icon" => $model->toString($this->icon, ["item" => $item]),
+                "icon" => $this->icon !== null ? $model->toString($this->icon, ["item" => $item]) : null,
+                "info" => $this->info !== null ? $model->$safeMethod($this->info, ["item" => $item]) : null,
                 "color" => $model->toString($this->color, ["item" => $item]),
                 "background" => $model->toString($this->background, [
                     "item" => $item,
@@ -107,6 +112,7 @@ class OptionsApi extends KirbyOptionsApi
         }
 
         // create Options object and render this subsequently
-        return $this->options = Options::factory($options);
+        // ensure not to resolve Kirby queries again
+        return $this->options = Options::factory($options, resolve: false);
     }
 }

@@ -30,6 +30,7 @@ class OptionsQuery extends KirbyOptionsQuery
         public string|null $text = null,
         public string|null $value = null,
         public string|null $icon = null,
+        public string|null $info = null,
         public string|null $color = null,
         public string|null $background = null,
         public string|null $image = null
@@ -47,6 +48,7 @@ class OptionsQuery extends KirbyOptionsQuery
             text: $props["text"] ?? null,
             value: $props["value"] ?? null,
             icon: $props["icon"] ?? null,
+            info: $props["info"] ?? null,
             color: $props["color"] ?? null,
             background: $props["background"] ?? null,
             image: $props["image"] ?? null
@@ -147,13 +149,19 @@ class OptionsQuery extends KirbyOptionsQuery
         }
 
         if ($result instanceof Collection === false) {
+            $type = is_object($result) === true ? $result::class : gettype($result);
+
             throw new InvalidArgumentException(
-                "Invalid query result data: " . get_class($result)
+                message: "Invalid query result data: " . $type
             );
         }
 
         // create options array
-        $options = $result->toArray(function ($item) use ($model, $safeMode) {
+        // text is only a raw string when using {< >}
+        // or when the safe mode is explicitly disabled (select field)
+        $safeMethod = $safeMode === true ? "toSafeHtmlString" : "toString";
+
+        $options = $result->toArray(function ($item) use ($model, $safeMethod) {
             // get defaults based on item type
             [
                 $alias,
@@ -166,8 +174,6 @@ class OptionsQuery extends KirbyOptionsQuery
             ] = $this->itemToDefaults($item);
             $data = ["item" => $item, $alias => $item];
 
-            //$data['image'] = 
-
             // value is always a raw string
             $value = $model->toString($this->value ?? $value, $data);
             $icon = $model->toString($this->icon ?? $icon, $data);
@@ -177,15 +183,14 @@ class OptionsQuery extends KirbyOptionsQuery
                 $data
             );
             $image = $model->toString($this->image ?? $image, $data);
+            $info = $this->info !== null ? $model->$safeMethod($this->info, $data) : null;
 
-            // text is only a raw string when using {< >}
-            // or when the safe mode is explicitly disabled (select field)
-            $safeMethod = $safeMode === true ? "toSafeString" : "toString";
             $text = $model->$safeMethod($this->text ?? $text, $data);
 
-            return compact("text", "value", "icon", "color", "background", "image");
+            return compact("text", "value", "icon", "info", "color", "background", "image");
         });
 
-        return $this->options = Options::factory($options);
+        // ensure not to resolve Kirby queries again
+        return $this->options = Options::factory($options, resolve: false);
     }
 }

@@ -1,81 +1,76 @@
 <template>
-  <div>
-    <fieldset
-      :disabled="disabled"
-      :class="['k-toggles-input', $attrs.class]"
-      :style="$attrs.style"
-    >
-      <legend class="sr-only">{{ $t("options") }}</legend>
+  <fieldset
+    :disabled="disabled"
+    :class="['k-toggles-input', $attrs.class]"
+    :style="$attrs.style"
+  >
+    <legend class="sr-only">{{ $t("options") }}</legend>
 
-      <k-input-validator :required="required" :value="JSON.stringify(value)">
-        <ul
-          :data-labels="labels"
-          :data-hasimages="hasImages"
-          :style="{ '--options': columns ?? options.length }"
+    <k-input-validator :required="required" :value="JSON.stringify(value)">
+      <ul
+        :data-labels="labels"
+        :data-hasimages="hasImages"
+        :style="{ '--options': columns ?? options.length }"
+      >
+        <li
+          v-for="(option, index) in options"
+          :key="index"
+          :data-disabled="disabled"
         >
-          <li
-            v-for="(option, index) in options"
-            :key="index"
-            :data-disabled="disabled"
-          >
-            <input
-              :id="id + '-' + index"
-              :aria-label="option.text"
-              :disabled="disabled"
-              :value="option.value"
-              :name="id"
-              :checked="value === option.value"
-              class="input-hidden"
-              type="radio"
-              @click="onClick(option.value)"
-              @change="onInput(option.value)"
-            />
+          <input
+            :id="id + '-' + index"
+            :aria-label="option.text"
+            :disabled="disabled"
+            :value="option.value"
+            :name="id"
+            :checked="value === option.value"
+            class="input-hidden"
+            type="radio"
+            @click="onClick(option.value)"
+            @change="onInput(option.value)"
+          />
 
-            <!-- Add style to label -->
-            <label
-              :for="id + '-' + index"
-              :title="option.text"
+          <!-- Add style to label -->
+          <label
+            :for="id + '-' + index"
+            :title="option.text"
+            :style="{
+              padding: 'var(--spacing-' + images.spacing + ')',
+              color: option.color ?? '#fff',
+              background: option.background ?? '#000',
+            }"
+          >
+            <div
+              v-if="hasImages"
+              class="k-toggles-image-wrapper"
               :style="{
-                padding: 'var(--spacing-' + images.spacing + ')',
-                color: option.color ?? '#fff',
-                background: option.background ?? '#000',
+                aspectRatio: images.ratio,
+                background: images.background,
               }"
             >
-              <div
-                v-if="hasImages"
-                class="k-toggles-image-wrapper"
+              <img
+                v-if="option.image"
+                class="k-toggles-image"
+                :src="option.image"
                 :style="{
-                  aspectRatio: images.ratio,
+                  objectFit: images.fit,
                   background: images.background,
                 }"
-              >
-                <img
-                  v-if="option.image"
-                  class="k-toggles-image"
-                  :src="option.image"
-                  :style="{
-                    objectFit: images.fit,
-                    background: images.background,
-                  }"
-                />
-              </div>
-              <div v-if="images.caption" class="k-toggles-caption-wrapper">
-                <k-icon v-if="option.icon" :type="option.icon" />
-                <!-- eslint-disable vue/no-v-html -->
-                <span
-                  v-if="labels || !option.icon"
-                  class="k-toggles-text"
-                  v-html="option.text"
-                />
-                <!-- eslint-enable vue/no-v-html -->
-              </div>
-            </label>
-          </li>
-        </ul>
-      </k-input-validator>
-    </fieldset>
-    <k-plain-license prefix="toggles" />
-  </div>
+              />
+            </div>
+            <div v-if="images.caption" class="k-toggles-caption-wrapper">
+              <k-icon v-if="option.icon" :type="option.icon" />
+              <span
+                v-if="labels || !option.icon"
+                class="k-toggles-text"
+                v-safe-html="option.text"
+              />
+            </div>
+          </label>
+        </li>
+      </ul>
+    </k-input-validator>
+  </fieldset>
 </template>
 
 <script>
@@ -84,12 +79,6 @@ export default {
   inheritAttrs: false,
   props: {
     hasImages: Boolean,
-    license: {
-      type: Object,
-      default() {
-        return null;
-      },
-    },
     images: {
       type: Object,
       default() {

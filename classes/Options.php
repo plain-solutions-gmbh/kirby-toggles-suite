@@ -49,7 +49,7 @@ class Options extends KirbyOptions
             $option['background']   = !empty($background) ? $background : "var(--input-color-background)";
             $option['color']        = !empty($color) ? $color : "var(--input-color-text)";
 
-            $option = Option::factory($option);
+            $option = Option::factory($option, $resolve);
             $collection->__set($option->id(), $option);
         }
 

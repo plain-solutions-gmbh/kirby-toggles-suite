@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Plain\\Toggles\\' => array($baseDir . '/classes'),
-    'Plain\\Helpers\\' => array($baseDir . '/utils'),
 );

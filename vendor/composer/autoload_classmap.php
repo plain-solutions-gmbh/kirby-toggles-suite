@@ -7,11 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Plain\\Helpers\\License' => $baseDir . '/utils/License.php',
-    'Plain\\Helpers\\Plugin' => $baseDir . '/utils/Plugin.php',
     'Plain\\Toggles\\FieldOptions' => $baseDir . '/classes/FieldOptions.php',
     'Plain\\Toggles\\Option' => $baseDir . '/classes/Option.php',
     'Plain\\Toggles\\Options' => $baseDir . '/classes/Options.php',
     'Plain\\Toggles\\OptionsApi' => $baseDir . '/classes/OptionsApi.php',
     'Plain\\Toggles\\OptionsQuery' => $baseDir . '/classes/OptionsQuery.php',
+    'Plain\\Toggles\\TogglesField' => $baseDir . '/classes/TogglesField.php',
 );

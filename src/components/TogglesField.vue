@@ -10,12 +10,6 @@ export default {
         return {};
       },
     },
-    license: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
   },
 };
 </script>
